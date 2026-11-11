@@ -9,19 +9,22 @@ export class LocalHeuristicAdapter extends BaseAIAdapter {
 
   detectDomain(topic) {
     const lower = (topic || '').toLowerCase();
-    if (lower.includes('crypto') || lower.includes('pay') || lower.includes('finance') || lower.includes('money') || lower.includes('টাকা') || lower.includes('বিনিয়োগ') || lower.includes('settlement')) {
+    // Use word-boundary matching to avoid false positives (e.g. "sust-ai-nable" matching "ai")
+    const hasWord = (word) => new RegExp(`\\b${word}\\b`, 'i').test(lower);
+
+    if (hasWord('crypto') || hasWord('defi') || hasWord('payment') || hasWord('pay') || hasWord('finance') || hasWord('fintech') || hasWord('money') || hasWord('banking') || lower.includes('টাকা') || lower.includes('বিনিয়োগ') || hasWord('settlement') || hasWord('trading')) {
       return 'fintech';
     }
-    if (lower.includes('saas') || lower.includes('cloud') || lower.includes('deploy') || lower.includes('dev') || lower.includes('infra') || lower.includes('সফটওয়্যার')) {
+    if (hasWord('saas') || hasWord('cloud') || hasWord('deploy') || hasWord('devops') || hasWord('infra') || hasWord('kubernetes') || hasWord('docker') || lower.includes('সফটওয়্যার')) {
       return 'saas';
     }
-    if (lower.includes('ai') || lower.includes('intel') || lower.includes('agent') || lower.includes('কৃত্রিম') || lower.includes('রোবট') || lower.includes('neural')) {
+    if (hasWord('ai') || hasWord('artificial intelligence') || hasWord('machine learning') || hasWord('neural') || hasWord('agent') || hasWord('llm') || lower.includes('কৃত্রিম') || lower.includes('রোবট')) {
       return 'ai';
     }
-    if (lower.includes('freelance') || lower.includes('career') || lower.includes('growth') || lower.includes('ফ্রিল্যান্সিং') || lower.includes('ক্যারিয়ার') || lower.includes('market')) {
+    if (hasWord('freelance') || hasWord('career') || hasWord('growth') || hasWord('marketing') || hasWord('startup') || lower.includes('ফ্রিল্যান্সিং') || lower.includes('ক্যারিয়ার')) {
       return 'growth';
     }
-    if (lower.includes('motion') || lower.includes('video') || lower.includes('design') || lower.includes('অ্যানিমেশন') || lower.includes('গ্রাফিক্স')) {
+    if (hasWord('motion') || hasWord('video') || hasWord('design') || hasWord('animation') || hasWord('graphics') || lower.includes('অ্যানিমেশন') || lower.includes('গ্রাফিক্স')) {
       return 'creative';
     }
     return 'general';
@@ -447,12 +450,29 @@ Ignite your motion reels today with MotionForge AI.`;
     }
 
     if (archetype === 'TECH_HUD') {
+      const hudHeadings = {
+        fintech: 'SETTLEMENT PROTOCOL ENGINE',
+        saas: 'CLOUD INFRASTRUCTURE MESH',
+        ai: 'NEURAL PROCESSING MATRIX',
+        growth: 'AUDIENCE ANALYTICS CORE',
+        creative: 'RENDER PIPELINE TELEMETRY',
+        general: `${topic.toUpperCase()} ARCHITECTURE`
+      };
+      const hudSubs = {
+        fintech: 'Multi-corridor transaction routing with cryptographic finality',
+        saas: 'Zero-downtime orchestration across containerized node clusters',
+        ai: 'Sub-millisecond inference with distributed tensor processing',
+        growth: 'Real-time engagement tracking and conversion funnel optimization',
+        creative: 'Frame-accurate vector choreography with audio-locked timing',
+        general: `High-precision engineering powering ${topic} at production scale`
+      };
+
       return {
-        heading: 'SYSTEM ARCHITECTURE',
-        subheading: 'Sub-millisecond synchronization across distributed node clusters',
+        heading: hudHeadings[domain] || hudHeadings.general,
+        subheading: hudSubs[domain] || hudSubs.general,
         badge: 'ACTIVE TELEMETRY // 60 FPS',
-        voiceoverText: `Engineered with mathematical precision, dynamic vector curves, and real-time telemetry.`,
-        emphasizedKeywords: ['ARCHITECTURE', 'SYNCHRONIZATION', '60 FPS'],
+        voiceoverText: `Engineered with mathematical precision for ${topic}. Dynamic vector curves and real-time telemetry.`,
+        emphasizedKeywords: [topic.split(' ')[0].toUpperCase(), 'ARCHITECTURE', '60 FPS'],
         visualDescription: 'Cybernetic HUD corners, horizontal sweeping laser scanner, telemetry readouts, and rotating dials.',
         animationInstructions: 'Corner brackets snap into coordinates while equalizer bars fluctuate with audio frequency.',
         transitionType,
@@ -483,6 +503,16 @@ Ignite your motion reels today with MotionForge AI.`;
           { label: 'INFERENCE', value: '12x', targetNumber: 12, suffix: 'x', prefix: '' },
           { label: 'ACCURACY', value: '99.4%', targetNumber: 99.4, suffix: '%', prefix: '' },
           { label: 'TIME SAVED', value: '85%', targetNumber: 85, suffix: '%', prefix: '' }
+        ],
+        growth: [
+          { label: 'ENGAGEMENT', value: '8.2x', targetNumber: 8.2, suffix: 'x', prefix: '' },
+          { label: 'RETENTION', value: '92%', targetNumber: 92, suffix: '%', prefix: '' },
+          { label: 'ROI UPLIFT', value: '340%', targetNumber: 340, suffix: '%', prefix: '' }
+        ],
+        creative: [
+          { label: 'RENDER FPS', value: '60', targetNumber: 60, suffix: 'fps', prefix: '' },
+          { label: 'EFFICIENCY', value: '15x', targetNumber: 15, suffix: 'x', prefix: '' },
+          { label: 'FIDELITY', value: '100%', targetNumber: 100, suffix: '%', prefix: '' }
         ]
       };
 
@@ -492,12 +522,21 @@ Ignite your motion reels today with MotionForge AI.`;
         { label: 'PRECISION', value: '100%', targetNumber: 100, suffix: '%', prefix: '' }
       ];
 
+      const metricHeadings = {
+        fintech: 'TRANSACTION PERFORMANCE',
+        saas: 'INFRASTRUCTURE METRICS',
+        ai: 'INTELLIGENCE BENCHMARKS',
+        growth: 'ENGAGEMENT ACCELERATION',
+        creative: 'PRODUCTION THROUGHPUT',
+        general: `${topic.toUpperCase()} METRICS`
+      };
+
       return {
-        heading: 'EMPIRICAL BENCHMARKS',
-        subheading: 'Proven measurable performance delivered across production workloads',
+        heading: metricHeadings[domain] || metricHeadings.general,
+        subheading: `Proven measurable performance delivered for ${topic}`,
         badge: 'VERIFIED METRICS',
-        voiceoverText: `Delivering 10x throughput gains and an 88% lift in engagement retention.`,
-        emphasizedKeywords: ['BENCHMARKS', 'PERFORMANCE', '10X'],
+        voiceoverText: `Delivering ${metrics[0].value} ${metrics[0].label.toLowerCase()} gains for ${topic}.`,
+        emphasizedKeywords: [topic.split(' ')[0].toUpperCase(), 'PERFORMANCE', metrics[0].value],
         visualDescription: 'Three glowing metric glass cards featuring animated radial SVG progress rings and counting numbers.',
         animationInstructions: 'Circular gauges draw clockwise from 0 to target value as numbers increment smoothly.',
         transitionType,
@@ -516,28 +555,52 @@ Ignite your motion reels today with MotionForge AI.`;
       const featConfigs = {
         fintech: [
           { title: 'Global Liquidity', description: 'Zero border constraints across 140+ corridors', icon: 'zap' },
-          { title: 'Multi-Asset Vaults', description: 'Cryptographic security with real-time auditing', icon: 'monitor' },
-          { title: 'Automated Routing', description: 'Algorithmic lowest-cost path execution', icon: 'volume-2' }
+          { title: 'Multi-Asset Vaults', description: 'Cryptographic security with real-time auditing', icon: 'shield' },
+          { title: 'Automated Routing', description: 'Algorithmic lowest-cost path execution', icon: 'cpu' }
         ],
         saas: [
-          { title: 'Zero Downtime', description: 'Blue-green rollouts executed instantaneously', icon: 'zap' },
-          { title: 'Universal SDKs', description: 'Native bindings for React, Node, and Python', icon: 'monitor' },
-          { title: 'Observability', description: 'Continuous tracing with sub-second alert loops', icon: 'volume-2' }
+          { title: 'Zero Downtime', description: 'Blue-green rollouts executed instantaneously', icon: 'cloud' },
+          { title: 'Universal SDKs', description: 'Native bindings for React, Node, and Python', icon: 'code' },
+          { title: 'Observability', description: 'Continuous tracing with sub-second alert loops', icon: 'monitor' }
+        ],
+        ai: [
+          { title: 'Auto Inference', description: 'Run models at edge with zero latency overhead', icon: 'cpu' },
+          { title: 'Data Pipeline', description: 'Stream-process billions of tokens in real-time', icon: 'database' },
+          { title: 'Model Registry', description: 'Version, deploy, and A/B test any architecture', icon: 'layers' }
+        ],
+        growth: [
+          { title: 'Viral Loops', description: 'Automated referral and engagement mechanics', icon: 'share-2' },
+          { title: 'A/B Optimization', description: 'Statistical significance in minutes, not weeks', icon: 'bar-chart-2' },
+          { title: 'Cohort Analytics', description: 'Deep behavioral segmentation at user level', icon: 'users' }
+        ],
+        creative: [
+          { title: 'Kinetic Typography', description: 'Per-word spring physics with tracking spread', icon: 'type' },
+          { title: 'Audio Cadence', description: 'Visual beats locked to voiceover waveforms', icon: 'volume-2' },
+          { title: 'Multi-Ratio Ready', description: 'Instant formatting for 16:9, 9:16 and 1:1', icon: 'monitor' }
         ]
       };
 
       const features = featConfigs[domain] || [
-        { title: 'Kinetic Typography', description: 'Per-word spring physics with tracking spread', icon: 'type' },
-        { title: 'Audio Cadence', description: 'Visual beats locked to voiceover waveforms', icon: 'volume-2' },
-        { title: 'Multi-Ratio Ready', description: 'Instant formatting for 16:9, 9:16 and 1:1', icon: 'monitor' }
+        { title: `${topic.split(' ')[0]} Engine`, description: `Core processing module for ${topic}`, icon: 'zap' },
+        { title: 'Smart Automation', description: 'Autonomous workflow orchestration', icon: 'cpu' },
+        { title: 'Universal Export', description: 'Multi-format output with zero quality loss', icon: 'download' }
       ];
 
+      const featureHeadings = {
+        fintech: 'FINANCIAL INFRASTRUCTURE',
+        saas: 'PLATFORM CAPABILITIES',
+        ai: 'INTELLIGENT MODULES',
+        growth: 'GROWTH MECHANICS',
+        creative: 'CREATIVE TOOLCHAIN',
+        general: `${topic.toUpperCase()} FEATURES`
+      };
+
       return {
-        heading: 'MODULAR CAPABILITIES',
-        subheading: 'Designed to adapt seamlessly to high-throughput production pipelines',
+        heading: featureHeadings[domain] || featureHeadings.general,
+        subheading: `Engineered components powering ${topic} at scale`,
         badge: 'ENGINE SPECIFICATION',
-        voiceoverText: `Experience modular architecture with zero compromise on visual fidelity or render latency.`,
-        emphasizedKeywords: ['MODULAR', 'PIPELINES', 'ZERO COMPROMISE'],
+        voiceoverText: `Experience modular architecture built specifically for ${topic} with zero compromise.`,
+        emphasizedKeywords: [topic.split(' ')[0].toUpperCase(), 'MODULAR', 'ZERO COMPROMISE'],
         visualDescription: 'Staggered card trio suspended in 3D depth with top accent lighting borders.',
         animationInstructions: 'Cards cascade sequentially into view with subtle vertical elastic easing.',
         transitionType,
@@ -553,12 +616,21 @@ Ignite your motion reels today with MotionForge AI.`;
     }
 
     if (archetype === 'ISOMETRIC_BADGE') {
+      const badgeHeadings = {
+        fintech: 'BANK-GRADE CERTIFIED',
+        saas: 'SOC2 ENTERPRISE GRADE',
+        ai: 'NEURAL CERTIFIED CORE',
+        growth: 'VERIFIED SCALE ENGINE',
+        creative: 'PRODUCTION CERTIFIED',
+        general: `${topic.toUpperCase()} CERTIFIED`
+      };
+
       return {
-        heading: 'ENTERPRISE CERTIFIED',
-        subheading: 'Battle-tested reliability trusted by forward-thinking teams',
+        heading: badgeHeadings[domain] || badgeHeadings.general,
+        subheading: `Battle-tested reliability trusted by teams building ${topic}`,
         badge: 'GOLD STANDARD',
-        voiceoverText: `Built on industrial-grade foundations, certified for mission-critical deployments.`,
-        emphasizedKeywords: ['CERTIFIED', 'RELIABILITY', 'GOLD STANDARD'],
+        voiceoverText: `Built on industrial-grade foundations for ${topic}, certified for mission-critical deployments.`,
+        emphasizedKeywords: [topic.split(' ')[0].toUpperCase(), 'CERTIFIED', 'GOLD STANDARD'],
         visualDescription: '3D angled floating shield card suspended in isometric space with rotating planetary orbit rings.',
         animationInstructions: 'Card floats gently along the Y-axis while the outer cyber ring rotates at 0.5 degrees per frame.',
         transitionType,
@@ -574,12 +646,21 @@ Ignite your motion reels today with MotionForge AI.`;
     }
 
     // CALL TO ACTION
+    const ctaHeadings = {
+      fintech: 'START TRADING TODAY',
+      saas: 'DEPLOY YOUR STACK NOW',
+      ai: 'ACTIVATE INTELLIGENCE',
+      growth: 'IGNITE YOUR GROWTH',
+      creative: 'CREATE YOUR REEL NOW',
+      general: `EXPERIENCE ${topic.split(' ')[0].toUpperCase()} NOW`
+    };
+
     return {
-      heading: 'BUILD YOUR REEL NOW',
-      subheading: 'motionforge.ai • Unlock Next-Gen Motion Graphics',
-      badge: 'PROMPT TO MOTION',
-      voiceoverText: `Take the leap today. Step into the future of autonomous motion design.`,
-      emphasizedKeywords: ['BUILD', 'NOW', 'MOTIONFORGE'],
+      heading: ctaHeadings[domain] || ctaHeadings.general,
+      subheading: `${topic} • Unlock the next frontier`,
+      badge: 'PROMPT TO ACTION',
+      voiceoverText: `Take the leap today. Step into the future of ${topic}.`,
+      emphasizedKeywords: [topic.split(' ')[0].toUpperCase(), 'NOW', 'FUTURE'],
       visualDescription: 'High-contrast glowing CTA container button, expanding circular energy pulses, and urgency particles.',
       animationInstructions: 'Button pulses rhythmically with a scale oscillation while arrow icon beckons to the right.',
       transitionType,

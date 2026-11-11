@@ -74,15 +74,14 @@ const StudioContent = () => {
       {toastMessage && (
         <div className="fixed bottom-5 right-5 z-50 animate-bounce">
           <div
-            className={`px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-medium border ${
-              toastMessage.type === 'success'
+            className={`px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-medium border ${toastMessage.type === 'success'
                 ? 'bg-emerald-950/90 border-emerald-500/50 text-emerald-200'
                 : toastMessage.type === 'error'
-                ? 'bg-red-950/90 border-red-500/50 text-red-200'
-                : toastMessage.type === 'warning'
-                ? 'bg-amber-950/90 border-amber-500/50 text-amber-200'
-                : 'bg-studio-900/95 border-electric-blue/50 text-slate-200'
-            }`}
+                  ? 'bg-red-950/90 border-red-500/50 text-red-200'
+                  : toastMessage.type === 'warning'
+                    ? 'bg-amber-950/90 border-amber-500/50 text-amber-200'
+                    : 'bg-studio-900/95 border-electric-blue/50 text-slate-200'
+              }`}
           >
             {toastMessage.type === 'success' ? (
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
@@ -104,5 +103,6 @@ export default function App() {
     <ProjectProvider>
       <StudioContent />
     </ProjectProvider>
+
   );
 }
