@@ -1,0 +1,234 @@
+{
+  "id": "proj-1794417706329",
+  "title": "New Dynamic Motion Reel",
+  "topic": "AI Autonomous Agents in 2026",
+  "aspectRatio": "9:16",
+  "fps": 30,
+  "durationInSeconds": 30,
+  "theme": {
+    "preset": "electric-blue",
+    "primaryColor": "#3B82F6",
+    "secondaryColor": "#8B5CF6",
+    "bgColor": "#070B14",
+    "fontHeading": "Space Grotesk",
+    "fontBody": "Inter"
+  },
+  "voice": {
+    "enabled": true,
+    "provider": "browser",
+    "voiceId": "en-US-GuyNeural",
+    "rate": 1,
+    "pitch": 1,
+    "volume": 1,
+    "audioUrl": null
+  },
+  "music": {
+    "enabled": true,
+    "trackId": "cyber-pulse",
+    "trackName": "Cybernetic Pulse (Synthwave)",
+    "volume": 0.25,
+    "audioUrl": "/api/voice/audio/cyber-pulse.wav"
+  },
+  "scenes": [
+    {
+      "id": "scene-1794417706326-1",
+      "order": 0,
+      "durationInSeconds": 6,
+      "archetype": "KINETIC_TITLE",
+      "heading": "AI AUTONOMOUS AGENTS IN 2026",
+      "subheading": "REVOLUTIONIZE YOUR VISUAL NARRATIVE",
+      "caption": "Scene 1 • KINETIC TITLE",
+      "badge": "⚡ NEXT-GEN MOTION ENGINE",
+      "metrics": [],
+      "features": [],
+      "layout": "center",
+      "motionPreset": "energetic",
+      "colorPalette": {
+        "bg": "#0B0F19",
+        "textPrimary": "#FFFFFF",
+        "textSecondary": "#94A3B8",
+        "accent": "#3B82F6",
+        "glow": "rgba(59, 130, 246, 0.4)"
+      },
+      "transition": {
+        "type": "zoom",
+        "durationInFrames": 15
+      },
+      "visualElements": {
+        "showGrid": true,
+        "showParticles": true,
+        "showOrb": true,
+        "shapeType": "circles"
+      },
+      "voiceoverScript": "Stop relying on static visuals. This is AI Autonomous Agents in 2026."
+    },
+    {
+      "id": "scene-1794417706326-2",
+      "order": 1,
+      "durationInSeconds": 6,
+      "archetype": "TECH_HUD",
+      "heading": "AUTONOMOUS MOTION CORE",
+      "subheading": "Real-time vector orchestration with frame-accurate timing",
+      "caption": "Scene 2 • TECH HUD",
+      "badge": "SYSTEM ACTIVE // 60 FPS",
+      "metrics": [],
+      "features": [],
+      "layout": "hud-frame",
+      "motionPreset": "cyber",
+      "colorPalette": {
+        "bg": "#0B0F19",
+        "textPrimary": "#FFFFFF",
+        "textSecondary": "#94A3B8",
+        "accent": "#8B5CF6",
+        "glow": "rgba(139, 92, 246, 0.4)"
+      },
+      "transition": {
+        "type": "wipe",
+        "durationInFrames": 15
+      },
+      "visualElements": {
+        "showGrid": true,
+        "showParticles": true,
+        "showOrb": true,
+        "shapeType": "hexagons"
+      },
+      "voiceoverScript": "Engineered with precision typography, dynamic SVG layouts, and procedural animations."
+    },
+    {
+      "id": "scene-1794417706326-3",
+      "order": 2,
+      "durationInSeconds": 6,
+      "archetype": "METRIC_COUNTER",
+      "heading": "PROVEN IMPACT",
+      "subheading": "Accelerate visual delivery without sacrificing fidelity",
+      "caption": "Scene 3 • METRIC COUNTER",
+      "badge": "BENCHMARK METRICS",
+      "metrics": [
+        {
+          "label": "RENDER SPEED",
+          "value": "10x",
+          "targetNumber": 10,
+          "suffix": "x",
+          "prefix": ""
+        },
+        {
+          "label": "RETENTION BOOST",
+          "value": "84%",
+          "targetNumber": 84,
+          "suffix": "%",
+          "prefix": "+"
+        },
+        {
+          "label": "FRAME ACCURACY",
+          "value": "100%",
+          "targetNumber": 100,
+          "suffix": "%",
+          "prefix": ""
+        }
+      ],
+      "features": [],
+      "layout": "split-left",
+      "motionPreset": "dramatic",
+      "colorPalette": {
+        "bg": "#0B0F19",
+        "textPrimary": "#FFFFFF",
+        "textSecondary": "#94A3B8",
+        "accent": "#3B82F6",
+        "glow": "rgba(59, 130, 246, 0.4)"
+      },
+      "transition": {
+        "type": "slide",
+        "durationInFrames": 15
+      },
+      "visualElements": {
+        "showGrid": true,
+        "showParticles": true,
+        "showOrb": true,
+        "shapeType": "circles"
+      },
+      "voiceoverScript": "Achieve 10x faster production cycles and an 84% lift in audience retention."
+    },
+    {
+      "id": "scene-1794417706326-4",
+      "order": 3,
+      "durationInSeconds": 6,
+      "archetype": "FEATURE_CARDS",
+      "heading": "STUDIO-GRADE CAPABILITIES",
+      "subheading": "Everything required for viral social motion reels",
+      "caption": "Scene 4 • FEATURE CARDS",
+      "badge": "FULL STACK ENGINE",
+      "metrics": [],
+      "features": [
+        {
+          "title": "Kinetic Typography",
+          "description": "Staggered per-character spring physics",
+          "icon": "type"
+        },
+        {
+          "title": "Procedural Audio",
+          "description": "Zero-latency visual waveform synchronization",
+          "icon": "volume-2"
+        },
+        {
+          "title": "Native MP4 Render",
+          "description": "Zero cloud latency local rendering engine",
+          "icon": "video"
+        }
+      ],
+      "layout": "center",
+      "motionPreset": "smooth",
+      "colorPalette": {
+        "bg": "#0B0F19",
+        "textPrimary": "#FFFFFF",
+        "textSecondary": "#94A3B8",
+        "accent": "#8B5CF6",
+        "glow": "rgba(139, 92, 246, 0.4)"
+      },
+      "transition": {
+        "type": "zoom",
+        "durationInFrames": 15
+      },
+      "visualElements": {
+        "showGrid": true,
+        "showParticles": true,
+        "showOrb": true,
+        "shapeType": "lines"
+      },
+      "voiceoverScript": "From custom typography to audio synchronization and native MP4 export."
+    },
+    {
+      "id": "scene-1794417706326-5",
+      "order": 4,
+      "durationInSeconds": 6,
+      "archetype": "ISOMETRIC_BADGE",
+      "heading": "ENTERPRISE READY",
+      "subheading": "Multi-aspect ratio outputs for 16:9, 9:16 and 1:1",
+      "caption": "Scene 5 • ISOMETRIC BADGE",
+      "badge": "PRODUCTION GRADE",
+      "metrics": [],
+      "features": [],
+      "layout": "split-right",
+      "motionPreset": "energetic",
+      "colorPalette": {
+        "bg": "#0B0F19",
+        "textPrimary": "#FFFFFF",
+        "textSecondary": "#94A3B8",
+        "accent": "#3B82F6",
+        "glow": "rgba(59, 130, 246, 0.4)"
+      },
+      "transition": {
+        "type": "glitch",
+        "durationInFrames": 15
+      },
+      "visualElements": {
+        "showGrid": true,
+        "showParticles": true,
+        "showOrb": true,
+        "shapeType": "hexagons"
+      },
+      "voiceoverScript": "Seamlessly scale from widescreen displays to viral vertical reels."
+    }
+  ],
+  "createdAt": "2026-11-11T17:21:46.329Z",
+  "updatedAt": "2026-11-11T17:21:46.337Z"
+}

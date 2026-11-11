@@ -1,16 +1,17 @@
 {
-  "name": "new-folder-(2)",
+  "name": "motionforge-ai",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Professional AI-Powered Motion Graphics Video Production Studio",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "vite",
+    "server": "node server/index.js",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@remotion/bundler": "^4.0.244",
     "@remotion/player": "^4.0.244",
     "@remotion/renderer": "^4.0.244",
@@ -26,6 +27,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
     "@vitejs/plugin-react": "^6.3.0",
     "autoprefixer": "^10.6.2",
     "postcss": "^8.5.32",

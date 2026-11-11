@@ -1,13 +1,29 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  body {
-    background-color: #060911;
-    color: #e2e8f0;
-    font-family: 'Inter', sans-serif;
-  }
+@theme {
+  --color-studio-950: #060911;
+  --color-studio-900: #0B0F19;
+  --color-studio-850: #0F1523;
+  --color-studio-800: #141D30;
+  --color-studio-750: #1A243D;
+  --color-studio-700: #202D4C;
+  --color-studio-600: #2F406A;
+  --color-studio-500: #475E94;
+
+  --color-electric-blue: #3B82F6;
+  --color-electric-purple: #8B5CF6;
+  --color-electric-cyan: #06B6D4;
+  --color-electric-pink: #EC4899;
+  --color-electric-amber: #F59E0B;
+  --color-electric-emerald: #10B981;
+}
+
+body {
+  background-color: #060911;
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  overflow: hidden;
 }
 
 /* Custom Studio Scrollbars */

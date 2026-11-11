@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const AspectRatioSchema = z.enum(['16:9', '9:16', '1:1']);
 export const FpsSchema = z.union([z.literal(24), z.literal(30), z.literal(60)]);
+export const LanguageSchema = z.enum(['en', 'bn']).default('en');
 
 export const SceneArchetypeSchema = z.enum([
   'KINETIC_TITLE',
@@ -19,6 +20,16 @@ export const TransitionTypeSchema = z.enum([
   'fade',
   'glitch'
 ]);
+
+export const BackgroundStyleSchema = z.enum([
+  'matrix-grid',
+  'cyber-haze',
+  'gradient-drift',
+  'particle-field',
+  'dark-minimal',
+  'hud-grid',
+  'deep-navy'
+]).default('matrix-grid');
 
 export const MotionPresetSchema = z.enum([
   'energetic',
@@ -42,19 +53,44 @@ export const FeatureItemSchema = z.object({
   icon: z.string().default('zap')
 });
 
+export const OnScreenTextSchema = z.object({
+  heading: z.string().default(''),
+  subheading: z.string().optional().default(''),
+  badge: z.string().optional().default('')
+});
+
 export const SceneSchema = z.object({
   id: z.string(),
   order: z.number().int().min(0),
-  durationInSeconds: z.number().min(2).max(30).default(5),
-  archetype: SceneArchetypeSchema.default('KINETIC_TITLE'),
+  startTime: z.number().min(0).default(0),
+  durationInSeconds: z.number().min(1).max(30).default(5),
+  
+  // Voice & Narration
+  voiceoverText: z.string().default(''),
+  voiceoverScript: z.string().optional().default(''), // Backward compatibility alias
+  
+  // On-Screen Typography
+  onScreenText: OnScreenTextSchema.default({ heading: '', subheading: '', badge: '' }),
   heading: z.string().default('Headline'),
   subheading: z.string().optional().default(''),
-  caption: z.string().optional().default(''),
   badge: z.string().optional().default(''),
+  caption: z.string().optional().default(''),
+  emphasizedKeywords: z.array(z.string()).default([]),
+
+  // Art Direction & Motion Design
+  visualDescription: z.string().default(''),
+  animationInstructions: z.string().default(''),
+  transitionType: TransitionTypeSchema.default('zoom'),
+  backgroundStyle: BackgroundStyleSchema.default('matrix-grid'),
+  soundEffectSuggestions: z.array(z.string()).default([]),
+
+  // Composition Archetype & Content
+  archetype: SceneArchetypeSchema.default('KINETIC_TITLE'),
   metrics: z.array(MetricItemSchema).optional().default([]),
   features: z.array(FeatureItemSchema).optional().default([]),
   layout: z.enum(['center', 'split-left', 'split-right', 'minimal', 'hud-frame']).default('center'),
   motionPreset: MotionPresetSchema.default('energetic'),
+  
   colorPalette: z.object({
     bg: z.string().default('#0B0F19'),
     textPrimary: z.string().default('#FFFFFF'),
@@ -68,6 +104,7 @@ export const SceneSchema = z.object({
     accent: '#3B82F6',
     glow: 'rgba(59, 130, 246, 0.5)'
   }),
+
   transition: z.object({
     type: TransitionTypeSchema.default('zoom'),
     durationInFrames: z.number().int().default(15)
@@ -75,6 +112,7 @@ export const SceneSchema = z.object({
     type: 'zoom',
     durationInFrames: 15
   }),
+
   visualElements: z.object({
     showGrid: z.boolean().default(true),
     showParticles: z.boolean().default(true),
@@ -85,14 +123,22 @@ export const SceneSchema = z.object({
     showParticles: true,
     showOrb: true,
     shapeType: 'circles'
-  }),
-  voiceoverScript: z.string().optional().default('')
+  })
+});
+
+export const StoryboardSchema = z.object({
+  topic: z.string().default(''),
+  language: LanguageSchema.default('en'),
+  totalDurationInSeconds: z.number().min(1).default(30),
+  sceneCount: z.number().int().min(1).default(5),
+  scenes: z.array(SceneSchema)
 });
 
 export const ProjectSchema = z.object({
   id: z.string(),
   title: z.string().min(1, 'Title is required'),
   topic: z.string().default(''),
+  language: LanguageSchema.default('en'),
   aspectRatio: AspectRatioSchema.default('16:9'),
   fps: FpsSchema.default(30),
   durationInSeconds: z.number().min(10).max(120).default(30),
